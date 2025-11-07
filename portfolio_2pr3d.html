@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2 Player Racing 3D — Project</title>
+  <style>
+    :root{ --bg:#f6f8fb; --text:#101418; --muted:#51606e; --line:#dfe7f0; --accent:#3aa0ff; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1060px;margin:0 auto;padding:28px}
+    header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+    h1{margin:0;font-size:28px}
+    .crumbs a{color:var(--muted)}
+    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#fff;background:var(--accent);font-weight:700}
+    h2{margin:26px 0 10px;font-size:22px}
+    p{line-height:1.7;color:var(--muted)}
+    ul{line-height:1.8;color:var(--muted)}
+    .hero{margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
+    .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#eaf2fb}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
+    figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+    figure img{width:100%;height:200px;object-fit:cover}
+    figcaption{padding:10px 12px;font-size:14px;color:var(--muted)}
+    .meta{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="crumbs"><a href="index.html">← Home</a></div>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">Google Play</a>
+    </header>
+
+    <h1>2 Player Racing 3D</h1>
+    <div class="meta">
+      <span class="pill">Mobile</span>
+      <span class="pill">Unity</span>
+      <span class="pill">C#</span>
+      <span class="pill">Optimization</span>
+    </div>
+
+    <section>
+      <div class="hero">
+        <!-- Replace with your export: /assets/2pr3d_hero_21x9.jpg -->
+        <img src="assets/twoplayerracing_hero_banner.png" alt="2 Player Racing hero banner placeholder" />
+      </div>
+      <h2>Overview</h2>
+      <p>Competitive split‑screen and single‑player mobile racing designed for fast pick‑up‑and‑play sessions. Built in Unity with a focus on responsive driving feel, clean UI, and robust performance on low‑ to mid‑range Android devices.</p>
+    </section>
+
+    <section>
+      <h2>Key Contributions</h2>
+      <ul>
+        <li>Custom arcade‑style vehicle physics tuned for touch controls and low input latency.</li>
+        <li>Rendering optimization via draw‑call batching, sprite atlas packing, compressed textures, and pooled VFX.</li>
+        <li>Accessible UI that adapts between single‑player and local two‑player modes.</li>
+        <li>Stable frame times on budget devices; profiled and eliminated GC spikes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Gallery</h2>
+      <div class="grid">
+        <figure>
+          <img src="assets/twoplayerracing_menu.png" alt="Menu" />
+          <figcaption>Main menu — minimal, readable layout.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/twoplayerracing_carselect.png" alt="Car select" />
+          <figcaption>Car selection — clear price/state, quick flow.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/twoplayerracing_race.png" alt="Race gameplay" />
+          <figcaption>Race — tuned handling and clean HUD.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/twoplayerracing_finish.png" alt="Finish screen" />
+          <figcaption>Finish screen — lightweight summary UI.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/twoplayerracing_splitscreen.png" alt="Split‑screen two player" />
+          <figcaption>Local two‑player mode on one device.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

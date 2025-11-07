@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VR Parachute Simulator — Project</title>
+  <style>
+    :root{ --bg:#0c1015; --panel:#0f151c; --text:#e9eef5; --muted:#9fb3c8; --line:#1a2330; --accent:#7bd0ff; }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1060px;margin:0 auto;padding:28px}
+    header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+    h1{margin:0;font-size:28px}
+    .crumbs a{color:var(--muted)}
+    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#06243a;background:linear-gradient(180deg,#c3e8ff,#7bd0ff);font-weight:800}
+    h2{margin:26px 0 10px;font-size:22px}
+    p{line-height:1.7;color:var(--muted)}
+    ul{line-height:1.8;color:var(--muted)}
+    .hero{margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,.25)}
+    .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#0d1218}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
+    figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0e141a}
+    figure img{width:100%;height:200px;object-fit:cover}
+    figcaption{padding:10px 12px;font-size:14px;color:var(--muted)}
+    .meta{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+    code.badge{background:#0e141a;border:1px solid var(--line);padding:2px 8px;border-radius:999px;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="crumbs"><a href="index.html">← Home</a></div>
+      <a class="btn" href="#screenshots">Skip to Screens</a>
+    </header>
+
+    <h1>VR Parachute Simulator</h1>
+    <div class="meta">
+      <span class="pill">VR</span>
+      <span class="pill">Unity</span>
+      <span class="pill">XR Interaction Toolkit</span>
+      <span class="pill">Physics</span>
+    </div>
+
+    <section>
+      <div class="hero">
+        <!-- Replace with your export: /assets/vr_para_hero_21x9.jpg -->
+        <img src="assets/parachute_banner.png" alt="VR Parachute hero banner placeholder" />
+      </div>
+      <h2>Overview</h2>
+      <p>VR simulation focused on realistic freefall dynamics and canopy control. Implements aerodynamic drag modeling, glide tuning, and rope‑handle steering mapped to hand controllers. Comfort settings and motion thresholds reduce sickness for longer sessions.</p>
+    </section>
+
+    <section>
+      <h2>Key Contributions</h2>
+      <ul>
+        <li>Dynamic drag and lift model that responds to posture and canopy state.</li>
+        <li>Rope handle steering with XR Interaction Toolkit (grab, pull magnitude → turn rate).</li>
+        <li>Glide/flare control and landing profiles; configurable mass/area parameters.</li>
+        <li>Performance budget kept stable on standalone VR hardware.</li>
+      </ul>
+    </section>
+
+    <section id="screenshots">
+      <h2>Gallery</h2>
+      <div class="grid">
+        <figure>
+          <img src="assets/parachute_freefall.png" alt="Freefall" />
+          <figcaption>Freefall — body posture affects drag & terminal velocity.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/parachute_canopy.png" alt="Canopy" />
+          <figcaption>Canopy open — glide tuning and flare control.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/parachute_handles.png" alt="Handles" />
+          <figcaption>Rope handle steering mapped to both hands.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Death Drive: Twisted Gears — Project</title>
+  <style>
+    :root{ --bg:#0a0d11; --text:#e9eef5; --muted:#9fb3c8; --line:#1a222c; --accent:#79e9ff; }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1200px 800px at 15% -10%, #15243a 0%, transparent 55%),
+                        radial-gradient(1000px 700px at 115% 0%, #27153a 0%, transparent 60%),
+                        var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1060px;margin:0 auto;padding:28px}
+    header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+    h1{margin:0;font-size:28px}
+    .crumbs a{color:var(--muted)}
+    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#00263b;background:linear-gradient(180deg,#c2f2ff,#79e9ff);font-weight:800}
+    h2{margin:26px 0 10px;font-size:22px}
+    p{line-height:1.7;color:var(--muted)}
+    ul{line-height:1.8;color:var(--muted)}
+    .hero{margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 40px rgba(123,233,255,.15)}
+    .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#0d1218}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
+    figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0e141a}
+    figure img{width:100%;height:200px;object-fit:cover}
+    figcaption{padding:10px 12px;font-size:14px;color:var(--muted)}
+    .meta{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="crumbs"><a href="index.html">← Home</a></div>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.BadaloffGames.BattleCarsArenaFight&hl=en" target="_blank" rel="noopener">Google Play</a>
+    </header>
+
+    <h1>Death Drive: Twisted Gears</h1>
+    <p style="color:var(--muted);margin-top:4px">Arcade racing meets tactical weapon systems and predictive aiming.</p>
+    <div class="meta">
+      <span class="pill">Mobile</span>
+      <span class="pill">Unity</span>
+      <span class="pill">C#</span>
+      <span class="pill">Gameplay Systems</span>
+    </div>
+
+    <section>
+      <div class="hero">
+        <!-- Replace with your export: /assets/deathdrive_hero_tank_21x9.jpg -->
+        <img src="assets/deathdrive_hero_banner.png" alt="Death Drive hero banner placeholder" />
+      </div>
+      <h2>Overview</h2>
+      <p>Arcade combat‑racing focused on vehicle‑mounted weapon systems and dynamic targeting mechanics. The project includes a custom turret controller with predictive aim, modular weapon loadouts, and readable combat feedback tuned for mobile screens.</p>
+    </section>
+
+    <section>
+      <h2>Key Gameplay Systems</h2>
+      <ul>
+        <li>Turret tracking with rotational smoothing and predictive targeting.</li>
+        <li>Modular weapon loadouts (miniguns, rockets) and progressive upgrades.</li>
+        <li>Collision‑aware driving model tuned for arcade handling.</li>
+        <li>Enemy AI that chases, evades, and disengages based on distance thresholds.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Gallery</h2>
+      <div class="grid">
+        <figure>
+          <img src="assets/deathdrive_tank.png" alt="Tank garage view" />
+          <figcaption>Hero vehicle — armored multi‑wheel tank with twin turret.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/deathdrive_shooting.png" alt="Shooting action" />
+          <figcaption>Combat moment — turret firing, target tracking at speed.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/deathdrive_upgrades.png" alt="Upgrades UI" />
+          <figcaption>Upgrades — modular armor, spikes, and weapon tiers.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/deathdrive_weapons.png" alt="Weapon select UI" />
+          <figcaption>Weapon selection — minigun / rockets, unlock flow.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

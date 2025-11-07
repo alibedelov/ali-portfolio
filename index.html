@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ali Badalov — Game Developer Portfolio</title>
+  <style>
+    :root{
+      --bg:#0a0d11; --panel:#0f141b; --card:#111823; --line:#1a2330; --text:#e7eef6; --muted:#9fb3c8;
+      --accent:#7bd0ff; --accent-2:#a97bff; --ok:#7bffa9;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(1200px 800px at 20% -10%, #1a2740 0%, transparent 60%),
+                        radial-gradient(1000px 700px at 120% 10%, #2a1f40 0%, transparent 60%),
+                        var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px;
+    min-height:100vh;        /* full height screen */
+  display:flex;            /* enable vertical layout */
+  flex-direction:column;
+    }
+    header{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line)}
+    .id{display:flex;gap:14px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 8px 40px rgba(123,208,255,.4);
+    display:flex;
+  justify-content:center;
+  align-items:center;}
+  .logo .emoji {
+  font-size:26px;
+  line-height:1;
+  display:inline-block;
+  transform:translateY(-2px); /* <-- adjust ONLY the emoji */
+}
+    h1{margin:0;font-weight:800;font-size:24px}
+    .tag{color:var(--muted)}
+    .links{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:var(--accent);background:transparent;font-weight:700}
+    .btn.filled{background:linear-gradient(180deg,#c3e8ff,#7bd0ff);color:#06243a;border:0}
+    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:22px}
+    .card{background:rgba(17,24,35,.7);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.35)}
+    .card img{width:100%;height:180px;object-fit:cover;background:#0b0f14}
+    .card .body{padding:14px}
+    .pill{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px}
+    h3{margin:8px 0 6px;font-size:18px}
+    p{margin:0 0 10px;color:var(--muted);line-height:1.6}
+    footer{
+         margin-top:auto;         /* pushes footer to bottom */
+  border-top:1px solid var(--line);
+  padding-top:16px;
+  color:var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="id">
+        <div class="logo" aria-hidden="true">
+            <span class="emoji">🎮</span>
+        </div>
+        <div>
+          <h1>Ali Badalov</h1>
+          <div class="tag">Unity Gameplay Programmer • Mobile • VR/Simulation</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a class="btn filled" href="portfolio_index.html">Home</a>
+        <a class="btn" href="https://play.google.com/store/apps/developer?id=Badaloff+Games&hl=en" target="_blank" rel="noopener">Google Play</a>
+        <a class="btn" href="https://www.linkedin.com/in/ali-badalov-97174b201/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="mailto:ali.badalov.dev@gmail.com">Contact</a>
+      </nav>
+    </header>
+
+    <section style="margin-top:18px">
+      <span class="pill">Featured Projects</span>
+      <div class="grid">
+        <!-- Card 1: Death Drive -->
+        <a class="card" href="portfolio_deathdrive.html">
+          <img src="assets/deathdrive_hero_banner.png" alt="Death Drive hero image placeholder">
+          <div class="body">
+            <h3>Death Drive: Twisted Gears</h3>
+            <p>Arcade racing meets tactical weapon systems and predictive aiming.</p>
+          </div>
+        </a>
+        <!-- Card 2: 2 Player Racing 3D -->
+        <a class="card" href="portfolio_2pr3d.html">
+          <img src="assets/twoplayerracing_banner.png" alt="2 Player Racing 3D hero image placeholder">
+          <div class="body">
+            <h3>2 Player Racing 3D</h3>
+            <p>Mobile racing with split‑screen and single‑player modes. 1,000,000+ downloads.</p>
+          </div>
+        </a>
+        <!-- Card 3: VR Parachute Simulator -->
+        <a class="card" href="portfolio_vrparachute.html">
+          <img src="assets/parachute_lil_banner.png" alt="VR Parachute Simulator hero image placeholder">
+          <div class="body">
+            <h3>VR Parachute Simulator</h3>
+            <p>Realistic freefall & canopy control—rope handle steering with Unity XR.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="y"></span> Ali Badalov.
+    </footer>
+  </div>
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
