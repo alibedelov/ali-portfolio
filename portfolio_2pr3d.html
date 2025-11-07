@@ -14,6 +14,10 @@
     h1{margin:0;font-size:28px}
     .crumbs a{color:var(--muted)}
     .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#fff;background:var(--accent);font-weight:700}
+    .store-links {
+  display:flex;
+  gap:10px;       /* space between buttons */
+}
     h2{margin:26px 0 10px;font-size:22px}
     p{line-height:1.7;color:var(--muted)}
     ul{line-height:1.8;color:var(--muted)}
@@ -30,9 +34,13 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="crumbs"><a href="index.html">← Home</a></div>
-      <a class="btn" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">Google Play</a>
-    </header>
+  <div class="crumbs"><a href="index.html">← Home</a></div>
+
+  <div class="store-links">
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">Google Play</a>
+    <a class="btn" href="https://apps.apple.com/us/app/2-player-racing-3d/id1547473313" target="_blank" rel="noopener">App Store</a>
+  </div>
+</header>
 
     <h1>2 Player Racing 3D</h1>
     <div class="meta">
