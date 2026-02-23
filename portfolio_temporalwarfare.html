@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VR Parachute Simulator — Project</title>
+  <title>Temporal Warfare: Chrono Strike — Project</title>
   <style>
-    :root{ --bg:#0c1015; --panel:#0f151c; --text:#e9eef5; --muted:#9fb3c8; --line:#1a2330; --accent:#7bd0ff; }
+    :root{ --bg:#f6f8fb; --text:#101418; --muted:#51606e; --line:#dfe7f0; --accent:#3aa0ff; }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
     a{color:inherit;text-decoration:none}
@@ -13,23 +13,26 @@
     header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
     h1{margin:0;font-size:28px}
     .crumbs a{color:var(--muted)}
-    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#06243a;background:linear-gradient(180deg,#c3e8ff,#7bd0ff);font-weight:800}
+    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#fff;background:var(--accent);font-weight:700}
+    .store-links {
+      display:flex;
+      gap:10px;
+    }
     h2{margin:26px 0 10px;font-size:22px}
     p{line-height:1.7;color:var(--muted)}
     ul{line-height:1.8;color:var(--muted)}
-    .hero{margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,.25)}
-    .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#0d1218}
+    .hero{margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
+    .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#eaf2fb}
     .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
-    figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0e141a}
+    figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
     
-    /* Clickable image styling */
+    /* Added cursor pointer and hover effect to let users know images are clickable */
     figure img{width:100%;height:200px;object-fit:cover;cursor:pointer;transition:opacity 0.2s ease;}
     figure img:hover{opacity:0.85;}
     
     figcaption{padding:10px 12px;font-size:14px;color:var(--muted)}
     .meta{display:flex;gap:10px;flex-wrap:wrap}
     .pill{border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-    code.badge{background:#0e141a;border:1px solid var(--line);padding:2px 8px;border-radius:999px;color:var(--muted);font-size:12px}
 
     /* Lightbox CSS */
     .lightbox {
@@ -56,53 +59,56 @@
   <div class="wrap">
     <header>
       <div class="crumbs"><a href="index.html">← Home</a></div>
-      <a class="btn" href="#screenshots">Skip to Screens</a>
+
+      <div class="store-links">
+        <a class="btn" href="https://yadikk.itch.io/temporal-warfare-chronostrike" target="_blank" rel="noopener">itch.io</a>
+      </div>
     </header>
 
-    <h1>VR Parachute Simulator</h1>
+    <h1>Temporal Warfare: Chrono Strike</h1>
     <div class="meta">
-      <span class="pill">VR</span>
+      <span class="pill">PC</span>
       <span class="pill">Unity</span>
-      <span class="pill">XR Interaction Toolkit</span>
-      <span class="pill">Physics</span>
+      <span class="pill">C#</span>
+      <span class="pill">FPS</span>
+      <span class="pill">Gameplay Programming</span>
     </div>
 
     <section>
       <div class="hero">
-        <img src="assets/parachute_banner.png" alt="VR Parachute hero banner placeholder" />
+        <img src="assets/temporalwarfare_hero_banner.png" alt="Temporal Warfare hero banner placeholder" />
       </div>
       <h2>Overview</h2>
-      <p>VR simulation focused on realistic freefall dynamics and canopy control. Implements aerodynamic drag modeling, glide tuning, and rope‑handle steering mapped to hand controllers. Comfort settings and motion thresholds reduce sickness for longer sessions.</p>
+      <p>A single-player FPS where the player must infiltrate a heavily guarded military base to stop a rogue commander from weaponizing a time machine. The game features a 3-level campaign scaling from exterior breach to interior infiltration, culminating in a boss fight. Built in Unity, the core hook is a dynamic time-manipulation mechanic that allows the player to trigger slow-motion mid-combat for tactical advantages.</p>
     </section>
 
     <section>
       <h2>Key Contributions</h2>
       <ul>
-        <li>Dynamic drag and lift model that responds to posture and canopy state.</li>
-        <li>Rope handle steering with XR Interaction Toolkit (grab, pull magnitude → turn rate).</li>
-        <li>Glide/flare control and landing profiles; configurable mass/area parameters.</li>
-        <li>Performance budget kept stable on standalone VR hardware.</li>
+        <li>Programmed a custom time-scale manipulation system, allowing seamless transitions into slow-motion combat without breaking physics or input registration.</li>
+        <li>Developed responsive first-person controller mechanics, including fluid movement, aiming, and weapon handling.</li>
+        <li>Designed and implemented AI behavior for enemy guards and a multi-stage boss encounter.</li>
+        <li>Structured a cohesive 3-act level progression (Exterior Base, Interior Facility, Time Machine Core).</li>
       </ul>
     </section>
 
-    <section id="screenshots">
+    <section>
       <h2>Gallery</h2>
       <div class="grid">
         <figure>
-          <img class="gallery-img" src="assets/parachute_freefall.png" alt="Freefall" />
-          <figcaption>Freefall — body posture affects drag & terminal velocity.</figcaption>
+          <img class="gallery-img" src="assets/temporalwarfare_exterior.png" alt="Level 1 Exterior" />
+          <figcaption>Level 1: Approaching the exterior perimeter of the military base.</figcaption>
         </figure>
         <figure>
-          <img class="gallery-img" src="assets/parachute_canopy.png" alt="Canopy" />
-          <figcaption>Canopy open — glide tuning and flare control.</figcaption>
+          <img class="gallery-img" src="assets/temporalwarfare_interior.png" alt="Level 2 Interior" />
+          <figcaption>Level 2: CQB combat and infiltration inside the facility.</figcaption>
         </figure>
         <figure>
-          <img class="gallery-img" src="assets/parachute_handles.png" alt="Handles" />
-          <figcaption>Rope handle steering mapped to both hands.</figcaption>
+          <img class="gallery-img" src="assets/temporalwarfare_boss.png" alt="Boss fight" />
+          <figcaption>Level 3: The final confrontation to secure the time machine.</figcaption>
         </figure>
       </div>
     </section>
-
   </div>
 
   <div class="lightbox" id="lightbox">

@@ -15,9 +15,9 @@
     .crumbs a{color:var(--muted)}
     .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#fff;background:var(--accent);font-weight:700}
     .store-links {
-  display:flex;
-  gap:10px;       /* space between buttons */
-}
+      display:flex;
+      gap:10px;       /* space between buttons */
+    }
     h2{margin:26px 0 10px;font-size:22px}
     p{line-height:1.7;color:var(--muted)}
     ul{line-height:1.8;color:var(--muted)}
@@ -25,22 +25,46 @@
     .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#eaf2fb}
     .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
     figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-    figure img{width:100%;height:200px;object-fit:cover}
+    
+    /* Clickable image styling */
+    figure img{width:100%;height:200px;object-fit:cover;cursor:pointer;transition:opacity 0.2s ease;}
+    figure img:hover{opacity:0.85;}
+    
     figcaption{padding:10px 12px;font-size:14px;color:var(--muted)}
     .meta{display:flex;gap:10px;flex-wrap:wrap}
     .pill{border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+
+    /* Lightbox CSS */
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 1000;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.active {
+      opacity: 1; pointer-events: auto;
+    }
+    .lightbox img {
+      max-width: 90%; max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-  <div class="crumbs"><a href="index.html">← Home</a></div>
+      <div class="crumbs"><a href="index.html">← Home</a></div>
 
-  <div class="store-links">
-    <a class="btn" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">Google Play</a>
-    <a class="btn" href="https://apps.apple.com/us/app/2-player-racing-3d/id1547473313" target="_blank" rel="noopener">App Store</a>
-  </div>
-</header>
+      <div class="store-links">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">Google Play</a>
+        <a class="btn" href="https://apps.apple.com/us/app/2-player-racing-3d/id1547473313" target="_blank" rel="noopener">App Store</a>
+      </div>
+    </header>
 
     <h1>2 Player Racing 3D</h1>
     <div class="meta">
@@ -52,7 +76,6 @@
 
     <section>
       <div class="hero">
-        <!-- Replace with your export: /assets/2pr3d_hero_21x9.jpg -->
         <img src="assets/twoplayerracing_hero_banner.png" alt="2 Player Racing hero banner placeholder" />
       </div>
       <h2>Overview</h2>
@@ -73,28 +96,50 @@
       <h2>Gallery</h2>
       <div class="grid">
         <figure>
-          <img src="assets/twoplayerracing_menu.png" alt="Menu" />
+          <img class="gallery-img" src="assets/twoplayerracing_menu.png" alt="Menu" />
           <figcaption>Main menu — minimal, readable layout.</figcaption>
         </figure>
         <figure>
-          <img src="assets/twoplayerracing_carselect.png" alt="Car select" />
+          <img class="gallery-img" src="assets/twoplayerracing_carselect.png" alt="Car select" />
           <figcaption>Car selection — clear price/state, quick flow.</figcaption>
         </figure>
         <figure>
-          <img src="assets/twoplayerracing_race.png" alt="Race gameplay" />
+          <img class="gallery-img" src="assets/twoplayerracing_race.png" alt="Race gameplay" />
           <figcaption>Race — tuned handling and clean HUD.</figcaption>
         </figure>
         <figure>
-          <img src="assets/twoplayerracing_finish.png" alt="Finish screen" />
+          <img class="gallery-img" src="assets/twoplayerracing_finish.png" alt="Finish screen" />
           <figcaption>Finish screen — lightweight summary UI.</figcaption>
         </figure>
         <figure>
-          <img src="assets/twoplayerracing_splitscreen.png" alt="Split‑screen two player" />
+          <img class="gallery-img" src="assets/twoplayerracing_splitscreen.png" alt="Split‑screen two player" />
           <figcaption>Local two‑player mode on one device.</figcaption>
         </figure>
       </div>
     </section>
-
   </div>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Enlarged view" id="lightbox-img">
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const galleryImages = document.querySelectorAll('.gallery-img');
+
+    // Open lightbox when clicking a gallery image
+    galleryImages.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    // Close lightbox when clicking anywhere on the dark overlay
+    lightbox.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
