@@ -43,12 +43,20 @@
     .pill{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px}
     h3{margin:8px 0 6px;font-size:18px}
     p{margin:0 0 10px;color:var(--muted);line-height:1.6}
+    
+    /* Updated Footer CSS */
     footer{
-         margin-top:auto;         /* pushes footer to bottom */
-  border-top:1px solid var(--line);
-  padding-top:16px;
-  color:var(--muted);
+      margin-top:auto;         /* pushes footer to bottom */
+      border-top:1px solid var(--line);
+      padding-top:16px;
+      color:var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
     }
+    footer a { transition: color 0.2s ease; }
+    footer a:hover { color: var(--text); }
   </style>
 </head>
 <body>
@@ -106,7 +114,8 @@
     </section>
 
     <footer>
-      © <span id="y"></span> Ali Badalov.
+      <div>© <span id="y"></span> Ali Badalov.</div>
+      <a href="privacy.html">Privacy Policy</a>
     </footer>
   </div>
   <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
