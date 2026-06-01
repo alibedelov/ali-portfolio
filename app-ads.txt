@@ -3439,6 +3439,8 @@ video.unrulymedia.com,1466670590438160000,RESELLER
 video.unrulymedia.com,7823643795310610000,RESELLER
 video.unrulymedia.com,7093244032824960000,RESELLER
 
+google.com, pub-5752045190228993, DIRECT, f08c47fec0942fa0
+
 #Ad.Plus
 ad.plus, NetworkCode, DIRECT
 google.com, pub-4573231550355221, RESELLER, f08c47fec0942fa0
