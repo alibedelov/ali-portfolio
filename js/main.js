@@ -211,7 +211,7 @@
     const counterEl = document.getElementById('achievements-counter');
     if (counterEl) {
       const count = Object.keys(unlockedAchievements).length;
-      counterEl.textContent = `${count} / 6 Unlocked`;
+      counterEl.textContent = `${count} / 7 Unlocked`;
     }
   }
   updateAchievementCounterUI();
@@ -222,6 +222,16 @@
       unlockAchievement('recruiter', 'Recruiter Speedrun', 'Downloaded Ali Badalov’s CV!', '📄');
     });
   });
+
+  // Track Hero Avatar interactions
+  const heroAvatar = document.getElementById('hero-avatar');
+  if (heroAvatar) {
+    heroAvatar.addEventListener('mouseenter', () => playSfx('hover'));
+    heroAvatar.addEventListener('click', () => {
+      playSfx('laser');
+      unlockAchievement('dev_revealed', 'Player 1 Identified', 'Found the mastermind behind the games!', '👋');
+    });
+  }
 
   // ==========================================================================
   // 3. Konami Code Easter Egg (↑ ↑ ↓ ↓ ← → ← → B A)
