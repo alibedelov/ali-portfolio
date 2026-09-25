@@ -3,143 +3,261 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>2 Player Racing 3D — Project</title>
-  <style>
-    :root{ --bg:#f6f8fb; --text:#101418; --muted:#51606e; --line:#dfe7f0; --accent:#3aa0ff; }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1060px;margin:0 auto;padding:28px}
-    header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-    h1{margin:0;font-size:28px}
-    .crumbs a{color:var(--muted)}
-    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#fff;background:var(--accent);font-weight:700}
-    .store-links {
-      display:flex;
-      gap:10px;       /* space between buttons */
-    }
-    h2{margin:26px 0 10px;font-size:22px}
-    p{line-height:1.7;color:var(--muted)}
-    ul{line-height:1.8;color:var(--muted)}
-    .hero{margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
-    .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#eaf2fb}
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
-    figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
-    
-    /* Clickable image styling */
-    figure img{width:100%;height:200px;object-fit:cover;cursor:pointer;transition:opacity 0.2s ease;}
-    figure img:hover{opacity:0.85;}
-    
-    figcaption{padding:10px 12px;font-size:14px;color:var(--muted)}
-    .meta{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-
-    /* Lightbox CSS */
-    .lightbox {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex; justify-content: center; align-items: center;
-      z-index: 1000;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .lightbox.active {
-      opacity: 1; pointer-events: auto;
-    }
-    .lightbox img {
-      max-width: 90%; max-height: 90vh;
-      border-radius: 8px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      object-fit: contain;
-    }
-  </style>
+  <title>2 Player Racing 3D — Case Study | Ali Badalov</title>
+  <meta name="description" content="2 Player Racing 3D: Over 1,000,000+ downloads. Mobile split-screen racing engineered for low input latency and maximum frame stability on low-end devices." />
+  <link rel="icon" type="image/png" href="assets/gamepad.png" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="crumbs"><a href="index.html">← Home</a></div>
+  <canvas id="bg-canvas"></canvas>
+  <div class="ambient-glow"></div>
+  <div class="ambient-grid"></div>
 
-      <div class="store-links">
-        <a class="btn" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">Google Play</a>
-        <a class="btn" href="https://apps.apple.com/us/app/2-player-racing-3d/id1547473313" target="_blank" rel="noopener">App Store</a>
+  <div class="wrap">
+    <header class="site-header">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <img src="assets/gamepad.png" alt="Gamepad" width="28" height="28" />
+        </div>
+        <div class="brand-text">
+          <h1>Ali Badalov</h1>
+          <span class="tagline">Unity Gameplay Programmer</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">← Back to Portfolio</a>
+        <button class="sfx-toggle" id="sfx-toggle" type="button" aria-label="Toggle Sound Effects">
+          <span class="sfx-wave"><span class="sfx-bar"></span><span class="sfx-bar"></span><span class="sfx-bar"></span></span>
+          <span class="sfx-text">SFX: OFF</span>
+        </button>
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">Google Play</a>
+        <a class="btn btn-secondary" href="https://apps.apple.com/us/app/2-player-racing-3d/id1547473313" target="_blank" rel="noopener">App Store</a>
       </div>
     </header>
 
-    <h1>2 Player Racing 3D</h1>
-    <div class="meta">
-      <span class="pill">Mobile</span>
-      <span class="pill">Unity</span>
-      <span class="pill">C#</span>
-      <span class="pill">Optimization</span>
-    </div>
-
-    <section>
-      <div class="hero">
-        <img src="assets/twoplayerracing_hero_banner.png" alt="2 Player Racing hero banner placeholder" />
+    <main class="project-detail-hero">
+      <div class="back-nav-bar">
+        <a class="back-link" href="index.html#projects">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to Projects
+        </a>
+        <div class="hero-actions" style="margin-top:0;">
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.badaloffgames.twoplayercarbeta&hl=en" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.02 2.02 0 0 1-.61-.95V2.764c0-.36.1-.7.61-.95zm11.24 11.24l2.13 2.13-11.77 6.7c-.4.23-.78.14-.99-.07l10.63-8.76zm0-2.108L4.22 2.186c.21-.21.59-.3 1-.07l11.76 6.7-2.13 2.13zm1.06 1.054l3.52 2.01c.95.54.95 1.44 0 1.99l-3.52 2.01-2.47-2.47 2.47-2.54z"/></svg>
+            Google Play (1M+ Downloads)
+          </a>
+          <a class="btn btn-secondary" href="https://apps.apple.com/us/app/2-player-racing-3d/id1547473313" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.05-1.82.93-2.88-.91.04-2.02.61-2.67 1.37-.58.67-1.09 1.75-.95 2.8.02 0 .04 0 .07 0 1.02 0 1.99-.53 2.62-1.29z"/></svg>
+            iOS App Store
+          </a>
+        </div>
       </div>
-      <h2>Overview</h2>
-      <p>Competitive split‑screen and single‑player mobile racing designed for fast pick‑up‑and‑play sessions. Built in Unity with a focus on responsive driving feel, clean UI, and robust performance on low‑ to mid‑range Android devices.</p>
-    </section>
 
-    <section>
-      <h2>Key Contributions</h2>
-      <ul>
-        <li>Custom arcade‑style vehicle physics tuned for touch controls and low input latency.</li>
-        <li>Rendering optimization via draw‑call batching, sprite atlas packing, compressed textures, and pooled VFX.</li>
-        <li>Accessible UI that adapts between single‑player and local two‑player modes.</li>
-        <li>Stable frame times on budget devices; profiled and eliminated GC spikes.</li>
-      </ul>
-    </section>
+      <div class="project-page-header">
+        <h1 class="project-page-title">2 Player Racing 3D</h1>
+        <p class="project-page-tagline">
+          Over 1,000,000+ organic downloads. Competitive split-screen and solo arcade racing engineered for razor-thin input latency and buttery 60 FPS performance on budget mobile hardware.
+        </p>
 
-    <section>
-      <h2>Gallery</h2>
-      <div class="grid">
-        <figure>
-          <img class="gallery-img" src="assets/twoplayerracing_menu.png" alt="Menu" />
-          <figcaption>Main menu — minimal, readable layout.</figcaption>
-        </figure>
-        <figure>
-          <img class="gallery-img" src="assets/twoplayerracing_carselect.png" alt="Car select" />
-          <figcaption>Car selection — clear price/state, quick flow.</figcaption>
-        </figure>
-        <figure>
-          <img class="gallery-img" src="assets/twoplayerracing_race.png" alt="Race gameplay" />
-          <figcaption>Race — tuned handling and clean HUD.</figcaption>
-        </figure>
-        <figure>
-          <img class="gallery-img" src="assets/twoplayerracing_finish.png" alt="Finish screen" />
-          <figcaption>Finish screen — lightweight summary UI.</figcaption>
-        </figure>
-        <figure>
-          <img class="gallery-img" src="assets/twoplayerracing_splitscreen.png" alt="Split‑screen two player" />
-          <figcaption>Local two‑player mode on one device.</figcaption>
-        </figure>
+        <div class="project-meta-strip">
+          <span class="meta-pill highlight">★ 1,000,000+ Downloads</span>
+          <span class="meta-pill">Mobile Racing</span>
+          <span class="meta-pill">Unity 3D</span>
+          <span class="meta-pill">C#</span>
+          <span class="meta-pill">Local Split-Screen</span>
+          <span class="meta-pill">GC & Frame Profiling</span>
+          <span class="meta-pill">Draw Call Batching</span>
+        </div>
       </div>
-    </section>
+
+      <div class="detail-hero-banner">
+        <img src="assets/twoplayerracing_hero_banner.png" alt="2 Player Racing 3D Hero Banner" />
+      </div>
+
+      <div class="detail-content-layout">
+        <div class="detail-main-content">
+          <div class="content-block">
+            <h2>Overview</h2>
+            <p>
+              2 Player Racing 3D is a highly popular mobile arcade racing title designed for instant pick-up-and-play sessions. Supporting both solo time trials and simultaneous two-player local competition on a single phone or tablet screen, the project achieved over 1,000,000+ downloads globally on Google Play and iOS.
+            </p>
+            <p>
+              The technical challenge was achieving stable, uninterrupted frame rates while running dual camera viewports, simultaneous physics calculations, and twin HUDs on low-end Android smartphones.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Key Technical Achievements & Architecture</h2>
+            <ul class="systems-feature-list">
+              <li class="systems-feature-item">
+                <strong>Simultaneous Dual-Viewport Split-Screen:</strong> Configured dynamic multi-camera rect views with synchronized audio listener management and independent touch coordinate parsing for each player.
+              </li>
+              <li class="systems-feature-item">
+                <strong>Zero-Allocation Physics Loop:</strong> Profiled and eliminated garbage collection spikes during high-intensity drifts and wall impacts by adopting non-allocating physics raycasts (Physics.RaycastNonAlloc).
+              </li>
+              <li class="systems-feature-item">
+                <strong>Aggressive Rendering Batching:</strong> Consolidated track geometry, vehicle body variations, and environment meshes into shared atlases and GPU instanced materials, slashing draw calls by over 60%.
+              </li>
+              <li class="systems-feature-item">
+                <strong>Custom Arcade Steering Model:</strong> Designed an intuitive drift and throttle curve that compensates for touchscreen ergonomics without requiring analog sticks.
+              </li>
+              <li class="systems-feature-item">
+                <strong>Scalable Monetization & Analytics:</strong> Integrated mediation layers for rewarded and interstitial ads alongside lightweight crash reporting tools.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="detail-sidebar">
+          <div class="sidebar-card">
+            <h3>Project Specifications</h3>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Downloads</span>
+              <span class="spec-value" style="color:var(--accent-gold)">1,000,000+</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Role</span>
+              <span class="spec-value">Solo Gameplay Programmer</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Engine</span>
+              <span class="spec-value">Unity</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Language</span>
+              <span class="spec-value">C#</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Key Focus</span>
+              <span class="spec-value">Performance & Latency</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Platforms</span>
+              <span class="spec-value">Android, iOS</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Gallery -->
+      <section class="gallery-section">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Gallery & UI Systems</h2>
+            <span class="section-badge">Click to enlarge</span>
+          </div>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/twoplayerracing_splitscreen.png" alt="Split-screen two player gameplay" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Local Split-Screen — Two players competing live on a single touch display.</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/twoplayerracing_race.png" alt="Solo Race Gameplay" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Race Track View — Tuned arcade drift handling and lightweight HUD overlay.</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/twoplayerracing_carselect.png" alt="Car Selection Flow" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Garage & Car Selection — Fast vehicle preview and state persistence.</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/twoplayerracing_finish.png" alt="Race Results Finish Screen" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Results Screen — Lightweight summary UI with rapid restart loop.</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/twoplayerracing_menu.png" alt="Main Menu" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Main Menu — Clean, uncluttered UI designed for immediate game entry.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Pagination -->
+      <nav class="project-pagination">
+        <a class="pagination-item" href="portfolio_deathdrive.html">
+          <span class="pagination-label">← Previous Project</span>
+          <span class="pagination-title">Motor Burn</span>
+        </a>
+        <a class="pagination-item next" href="portfolio_vrparachute.html">
+          <span class="pagination-label">Next Project →</span>
+          <span class="pagination-title">VR Parachute Simulator</span>
+        </a>
+      </nav>
+    </main>
+
+    <footer class="site-footer">
+      <div>© <span id="y">2026</span> Ali Badalov.</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </footer>
   </div>
 
   <div class="lightbox" id="lightbox">
-    <img src="" alt="Enlarged view" id="lightbox-img">
+    <div class="lightbox-close" title="Close (Esc)">✕</div>
+    <div class="lightbox-nav-btn lightbox-prev" title="Previous Image (←)">‹</div>
+    <div class="lightbox-nav-btn lightbox-next" title="Next Image (→)">›</div>
+    <div class="lightbox-content-wrap">
+      <img src="" alt="" id="lightbox-img" />
+      <div class="lightbox-caption"></div>
+      <div class="lightbox-counter"></div>
+    </div>
   </div>
 
-  <script>
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const galleryImages = document.querySelectorAll('.gallery-img');
+  <!-- Mobile Floating Action Dock (< 768px) -->
+  <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
+    <a href="index.html" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a href="index.html#projects" class="mobile-dock-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 18 3 21 8 12 22 3 8 6 3"/></svg>
+      Projects
+    </a>
+    <a href="index.html#game-lab" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.35 18A2 2 0 0 0 6 21h12a2 2 0 0 0 1.65-3L14 9.31V2"/></svg>
+      Game Lab
+    </a>
+    <a href="assets/Ali_Badalov_CV.pdf" download="Ali_Badalov_CV.pdf" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      CV
+    </a>
+    <a href="mailto:alibedelov@gmail.com" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+      Contact
+    </a>
+  </nav>
 
-    // Open lightbox when clicking a gallery image
-    galleryImages.forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
-      });
-    });
-
-    // Close lightbox when clicking anywhere on the dark overlay
-    lightbox.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>

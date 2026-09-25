@@ -3,130 +3,614 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ali Badalov — Game Developer Portfolio</title>
-  <style>
-    :root{
-      --bg:#0a0d11; --panel:#0f141b; --card:#111823; --line:#1a2330; --text:#e7eef6; --muted:#9fb3c8;
-      --accent:#7bd0ff; --accent-2:#a97bff; --ok:#7bffa9;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:radial-gradient(1200px 800px at 20% -10%, #1a2740 0%, transparent 60%),
-                        radial-gradient(1000px 700px at 120% 10%, #2a1f40 0%, transparent 60%),
-                        var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1100px;margin:0 auto;padding:28px;
-    min-height:100vh;        /* full height screen */
-  display:flex;            /* enable vertical layout */
-  flex-direction:column;
-    }
-    header{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line)}
-    .id{display:flex;gap:14px;align-items:center}
-    .logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 8px 40px rgba(123,208,255,.4);
-    display:flex;
-  justify-content:center;
-  align-items:center;}
-  .logo .emoji {
-  font-size:26px;
-  line-height:1;
-  display:inline-block;
-  transform:translateY(-2px); /* <-- adjust ONLY the emoji */
-}
-    h1{margin:0;font-weight:800;font-size:24px}
-    .tag{color:var(--muted)}
-    .links{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:var(--accent);background:transparent;font-weight:700}
-    .btn.filled{background:linear-gradient(180deg,#c3e8ff,#7bd0ff);color:#06243a;border:0}
-    .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:22px}
-    .card{background:rgba(17,24,35,.7);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.35)}
-    .card img{width:100%;height:180px;object-fit:cover;background:#0b0f14}
-    .card .body{padding:14px}
-    .pill{display:inline-block;padding:2px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px}
-    h3{margin:8px 0 6px;font-size:18px}
-    p{margin:0 0 10px;color:var(--muted);line-height:1.6}
-    
-    /* Updated Footer CSS */
-    footer{
-      margin-top:auto;         /* pushes footer to bottom */
-      border-top:1px solid var(--line);
-      padding-top:16px;
-      color:var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-    }
-    footer a { transition: color 0.2s ease; }
-    footer a:hover { color: var(--text); }
-  </style>
+  <title>Ali Badalov — Unity Gameplay Programmer & Game Developer</title>
+  <meta name="description" content="Portfolio of Ali Badalov, Unity Gameplay Programmer specializing in mobile games (1M+ downloads), VR/XR simulations, and PC action titles." />
+  <link rel="icon" type="image/png" href="assets/gamepad.png" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- Dynamic Particle Canvas & Ambient Effects -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="ambient-glow"></div>
+  <div class="ambient-grid"></div>
+
+  <!-- Toast Notification Container for Achievements -->
+  <div id="achievement-toast-container" class="achievement-toast-container"></div>
+
   <div class="wrap">
-    <header>
-      <div class="id">
-        <div class="logo" aria-hidden="true">
-            <span class="emoji">🎮</span>
+    <!-- Navigation Header -->
+    <header class="site-header">
+      <a href="index.html" class="brand" aria-label="Ali Badalov Portfolio Home">
+        <div class="brand-icon">
+          <img src="assets/gamepad.png" alt="Gamepad Icon" width="28" height="28" />
         </div>
-        <div>
+        <div class="brand-text">
           <h1>Ali Badalov</h1>
-          <div class="tag">Unity Gameplay Programmer • Mobile • VR/Simulation</div>
+          <span class="tagline">Unity Gameplay Programmer</span>
         </div>
-      </div>
-      <nav class="links">
-        <a class="btn filled" href="index.html">Home</a>
-        <a class="btn" href="https://play.google.com/store/apps/developer?id=Badaloff+Games&hl=en" target="_blank" rel="noopener">Google Play</a>
-        <a class="btn" href="https://apps.apple.com/us/developer/ali-badalov/id1547473316" target="_blank" rel="noopener">App Store</a>
-        <a class="btn" href="https://www.linkedin.com/in/ali-badalov-97174b201/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn" href="assets/Ali_Badalov_CV.pdf" download="Ali_Badalov_CV.pdf">Download CV</a>
-        <a class="btn" href="mailto:alibedelov@gmail.com">Contact</a>
+      </a>
+
+      <nav class="nav-links">
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#game-lab" style="color:var(--accent-cyan);font-weight:700;">Game Lab 🧪</a>
+        <a class="nav-link" href="#skills">Skills</a>
+
+        <!-- Sound FX Audio Toggle -->
+        <button class="sfx-toggle" id="sfx-toggle" type="button" aria-label="Toggle Sound Effects" title="Enable Web Audio Synthesizer SFX">
+          <span class="sfx-wave">
+            <span class="sfx-bar"></span>
+            <span class="sfx-bar"></span>
+            <span class="sfx-bar"></span>
+          </span>
+          <span class="sfx-text">SFX: OFF</span>
+        </button>
+
+        <!-- Achievements Counter Badge -->
+        <div class="achievement-badge-pill" id="achievements-counter" title="Unlocked Gamer Achievements">
+          🏆 0 / 6 Unlocked
+        </div>
+
+        <a class="btn btn-cv" href="assets/Ali_Badalov_CV.pdf" download="Ali_Badalov_CV.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          CV
+        </a>
+        <a class="btn btn-primary" href="mailto:alibedelov@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Contact
+        </a>
       </nav>
     </header>
 
-    <section style="margin-top:18px">
-      <span class="pill">Featured Projects</span>
-      <div class="grid">
-        <a class="card" href="portfolio_deathdrive.html">
-          <img src="assets/deathdrive_hero_banner.png" alt="Death Drive hero image placeholder">
-          <div class="body">
-            <h3>Motor Burn</h3>
-            <p>Arcade racing meets tactical weapon systems and predictive aiming.</p>
-          </div>
-        </a>
-        <a class="card" href="portfolio_2pr3d.html">
-          <img src="assets/twoplayerracing_banner.png" alt="2 Player Racing 3D hero image placeholder">
-          <div class="body">
-            <h3>2 Player Racing 3D</h3>
-            <p>Mobile racing with split‑screen and single‑player modes. 1,000,000+ downloads.</p>
-          </div>
-        </a>
-        <a class="card" href="portfolio_vrparachute.html">
-          <img src="assets/parachute_lil_banner.png" alt="VR Parachute Simulator hero image placeholder">
-          <div class="body">
-            <h3>VR Parachute Simulator</h3>
-            <p>Realistic freefall & canopy control—rope handle steering with Unity XR.</p>
-          </div>
-        </a>
-        <a class="card" href="portfolio_temporalwarfare.html">
-          <img src="assets/temporalwarfare_banner.png" alt="Temporal Warfare hero image placeholder">
-          <div class="body">
-            <h3>Temporal Warfare: Chrono Strike</h3>
-            <p>Single-player FPS featuring slow-motion combat mechanics and a 3-level base infiltration campaign.</p>
-          </div>
-        </a>
-        <a class="card" href="portfolio_hidrohazbo.html">
-          <img src="assets/hidrohazbo_banner.png" alt="HIDRO HAZBO hero image placeholder">
-          <div class="body">
-            <h3>HIDRO HAZBO</h3>
-            <p>Action rougelike game made in and took the 1st place at OTGET Game Jam 3.</p>
-          </div>
-        </a>
-      </div>
-    </section>
+    <!-- Hero Section -->
+    <main>
+      <section class="hero-section">
+        <div class="hero-status-pill">
+          <span class="pulse-dot"></span>
+          <span>Open to Gameplay & Systems Roles</span>
+        </div>
 
-    <footer>
-      <div>© <span id="y"></span> Ali Badalov.</div>
-      <a href="privacy.html">Privacy Policy</a>
+        <h1 class="hero-title">
+          Engineering High-Impact <span class="text-gradient">Gameplay Systems, Physics & VR</span> Experiences.
+        </h1>
+
+        <p class="hero-bio">
+          I'm <strong>Ali Badalov</strong>, a Unity Gameplay Programmer specializing in responsive vehicle physics, combat AI state machines, and immersive XR simulations. With over <strong>1,000,000+ organic downloads</strong> across mobile platforms and an <strong>award-winning game jam record</strong>, I build games that feel tactile, tight, and performant.
+        </p>
+
+        <!-- Quick Stats Ribbon -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value gold">1,000,000+</div>
+            <div class="stat-label">Mobile Game Downloads</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">5+</div>
+            <div class="stat-label">Shipped Titles & Simulations</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value gold">1st Place 🏆</div>
+            <div class="stat-label">OTGET Game Jam 3 Winner</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">Unity & C#</div>
+            <div class="stat-label">Physics, Profiling & Systems</div>
+          </div>
+        </div>
+
+        <!-- Action Links -->
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+            Explore Projects
+          </a>
+          <a class="btn btn-secondary" href="#tools">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            Tools & Stack
+          </a>
+          <a class="btn btn-secondary" href="#game-lab" style="border-color:var(--accent-cyan);color:var(--accent-cyan);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Play Game Lab (Interactive)
+          </a>
+          <a class="btn btn-secondary" href="assets/Ali_Badalov_CV.pdf" download="Ali_Badalov_CV.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Resume (PDF)
+          </a>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           PROMINENT TOOLS & TECHNOLOGIES ECOSYSTEM SHOWCASE
+           ========================================================================== -->
+      <section id="tools" class="tools-ecosystem" style="scroll-margin-top: 100px; margin: 10px 0 60px;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Tools & Technologies Ecosystem</h2>
+            <span class="section-badge" style="border-color:rgba(157,78,221,0.4);color:var(--accent-purple);">Battle-Tested Stack</span>
+          </div>
+          <span style="font-size:13px;color:var(--text-muted);">
+            Engines, frameworks, and deployment tooling utilized across shipped titles and prototypes
+          </span>
+        </div>
+
+        <div class="tools-grid">
+          <!-- 1. Unity -->
+          <div class="tool-card" style="--tool-color:#ffffff;--tool-glow:rgba(255,255,255,0.25);--tool-bg:rgba(255,255,255,0.1);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2L3 7v10l9 5 9-5V7l-9-5zm0 2.2l6.8 3.8L12 11.8 5.2 8 12 4.2zM4.9 9.6l6.1 3.4v7.4l-6.1-3.4V9.6zm8.1 10.8V13l6.1-3.4v7.4l-6.1 3.4z"/></svg>
+            </div>
+            <span class="tool-name">Unity Engine</span>
+            <span class="tool-badge">Primary Engine</span>
+            <p class="tool-desc">2D, 3D, URP, ScriptableObjects & Custom Editor Tools</p>
+          </div>
+
+          <!-- 2. C# -->
+          <div class="tool-card" style="--tool-color:#a855f7;--tool-glow:rgba(168,85,247,0.3);--tool-bg:rgba(168,85,247,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5c-2.49 0-4.5-2.01-4.5-4.5S8.51 7.5 11 7.5c1.4 0 2.65.64 3.47 1.64l-1.42 1.42C12.58 9.94 11.85 9.5 11 9.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5c.85 0 1.58-.44 2.05-1.06l1.42 1.42c-.82 1-2.07 1.64-3.47 1.64zm7.25-3h-1.5v1.5h-.75V13.5h-1.5v-.75h1.5v-1.5h.75v1.5h1.5v.75z"/></svg>
+            </div>
+            <span class="tool-name">C# (.NET)</span>
+            <span class="tool-badge">Lead Language</span>
+            <p class="tool-desc">High-performance gameplay systems & zero-alloc code</p>
+          </div>
+
+          <!-- 3. XR Interaction Toolkit -->
+          <div class="tool-card" style="--tool-color:#00f2fe;--tool-glow:rgba(0,242,254,0.3);--tool-bg:rgba(0,242,254,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 4C7.58 4 4 7.58 4 12c0 2.2.89 4.2 2.34 5.65.41.41.97.64 1.55.64h8.22c.58 0 1.14-.23 1.55-.64C19.11 16.2 20 14.2 20 12c0-4.42-3.58-8-8-8zm-3 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+            </div>
+            <span class="tool-name">XR Toolkit</span>
+            <span class="tool-badge">VR & Meta Quest</span>
+            <p class="tool-desc">Two-handed rope steering & comfort locomotion systems</p>
+          </div>
+
+          <!-- 4. Cinemachine -->
+          <div class="tool-card" style="--tool-color:#ffbe0b;--tool-glow:rgba(255,190,11,0.3);--tool-bg:rgba(255,190,11,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4zM8 17H5v-2h3v2zm0-4H5v-2h3v2zm0-4H5V7h3v2zm6 8h-4v-6h4v6zm5 0h-3v-2h3v2zm0-4h-3v-2h3v2zm0-4h-3V7h3v2z"/></svg>
+            </div>
+            <span class="tool-name">Cinemachine</span>
+            <span class="tool-badge">Camera Director</span>
+            <p class="tool-desc">Impulse screen shake, dynamic target blends & pacing</p>
+          </div>
+
+          <!-- 5. PhysX & Vehicle Physics -->
+          <div class="tool-card" style="--tool-color:#10e793;--tool-glow:rgba(16,231,147,0.3);--tool-bg:rgba(16,231,147,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-6 4a6 6 0 0 1 12 0 6 6 0 0 1-12 0z"/></svg>
+            </div>
+            <span class="tool-name">PhysX Engine</span>
+            <span class="tool-badge">Kinematics & Drift</span>
+            <p class="tool-desc">Raycast suspension, aerodynamic drag & predictive aim</p>
+          </div>
+
+          <!-- 6. Unity Profiler -->
+          <div class="tool-card" style="--tool-color:#ff5964;--tool-glow:rgba(255,89,100,0.3);--tool-bg:rgba(255,89,100,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M3.5 18.5l6-6 4 4L22 6.92 20.59 5.5l-7.09 7.08-4-4L2 16.08l1.5 2.42z"/><path d="M19 12h2v7h-7v-2h3.59l-4.29-4.29 1.41-1.42L19 15.59V12z"/></svg>
+            </div>
+            <span class="tool-name">Unity Profiler</span>
+            <span class="tool-badge">Optimization</span>
+            <p class="tool-desc">GC spike elimination, draw call batching & GPU budgets</p>
+          </div>
+
+          <!-- 7. Google Play Console -->
+          <div class="tool-card" style="--tool-color:#34d399;--tool-glow:rgba(52,211,153,0.3);--tool-bg:rgba(52,211,153,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.02 2.02 0 0 1-.61-.95V2.764c0-.36.1-.7.61-.95zm11.24 11.24l2.13 2.13-11.77 6.7c-.4.23-.78.14-.99-.07l10.63-8.76zm0-2.108L4.22 2.186c.21-.21.59-.3 1-.07l11.76 6.7-2.13 2.13zm1.06 1.054l3.52 2.01c.95.54.95 1.44 0 1.99l-3.52 2.01-2.47-2.47 2.47-2.54z"/></svg>
+            </div>
+            <span class="tool-name">Google Play</span>
+            <span class="tool-badge">1,000,000+ Downloads</span>
+            <p class="tool-desc">AAB publishing, in-app billing & live-ops analytics</p>
+          </div>
+
+          <!-- 8. App Store Connect -->
+          <div class="tool-card" style="--tool-color:#f1f5f9;--tool-glow:rgba(241,245,249,0.25);--tool-bg:rgba(255,255,255,0.1);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.05-1.82.93-2.88-.91.04-2.02.61-2.67 1.37-.58.67-1.09 1.75-.95 2.8.02 0 .04 0 .07 0 1.02 0 1.99-.53 2.62-1.29z"/></svg>
+            </div>
+            <span class="tool-name">App Store Connect</span>
+            <span class="tool-badge">iOS Production</span>
+            <p class="tool-desc">TestFlight distribution, iOS signing & compliance</p>
+          </div>
+
+          <!-- 9. itch.io -->
+          <div class="tool-card" style="--tool-color:#fa5252;--tool-glow:rgba(250,82,82,0.3);--tool-bg:rgba(250,82,82,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M2 3h20c1.05 0 2 .95 2 2v14c0 1.05-.95 2-2 2H2c-1.05 0-2-.95-2-2V5c0-1.05.95-2 2-2zm4.5 5.5l3.5 3.5-3.5 3.5 1.5 1.5 5-5-5-5-1.5 1.5zm7 7h6v-2h-6v2z"/></svg>
+            </div>
+            <span class="tool-name">itch.io</span>
+            <span class="tool-badge">Jam Winner 🏆</span>
+            <p class="tool-desc">OTGET Game Jam 3 1st place release & PC web builds</p>
+          </div>
+
+          <!-- 10. Git & GitHub -->
+          <div class="tool-card" style="--tool-color:#f97316;--tool-glow:rgba(249,115,22,0.3);--tool-bg:rgba(249,115,22,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </div>
+            <span class="tool-name">Git & GitHub</span>
+            <span class="tool-badge">Version Control</span>
+            <p class="tool-desc">Branching workflows, LFS asset tracking & release tags</p>
+          </div>
+
+          <!-- 11. Shader Graph & URP -->
+          <div class="tool-card" style="--tool-color:#ec4899;--tool-glow:rgba(236,72,153,0.3);--tool-bg:rgba(236,72,153,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M8.5 7.5l5 7M15.5 7.5l-5 7M9 6h6"/></svg>
+            </div>
+            <span class="tool-name">Shader Graph</span>
+            <span class="tool-badge">Visual Shaders</span>
+            <p class="tool-desc">Procedural combat dissolves, glow rings & URP materials</p>
+          </div>
+
+          <!-- 12. Visual Studio -->
+          <div class="tool-card" style="--tool-color:#8b5cf6;--tool-glow:rgba(139,92,246,0.3);--tool-bg:rgba(139,92,246,0.12);">
+            <div class="tool-icon-box">
+              <svg viewBox="0 0 24 24"><path d="M17.5 2.5L7.5 10.5 3 7 1.5 8.5 6 12l-4.5 3.5 1.5 1.5 4.5-3.5 10 8 5-2.5V5zM17 17.5l-7-5.5 7-5.5v11z"/></svg>
+            </div>
+            <span class="tool-name">Visual Studio</span>
+            <span class="tool-badge">Primary IDE</span>
+            <p class="tool-desc">C# debugging, memory telemetry & Roslyn analyzers</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects Section -->
+      <section id="projects" style="scroll-margin-top: 100px;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Featured Projects</h2>
+            <span class="section-badge">Case Studies</span>
+          </div>
+
+          <!-- Category Filters -->
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+            <button class="filter-btn" data-filter="vr">VR / Simulation</button>
+            <button class="filter-btn" data-filter="pc">PC / Action</button>
+            <button class="filter-btn" data-filter="jam">Game Jam</button>
+          </div>
+        </div>
+
+        <div class="projects-grid">
+          <!-- 1. Motor Burn -->
+          <a class="project-card" data-category="mobile" href="portfolio_deathdrive.html">
+            <div class="card-media">
+              <span class="card-highlight-badge badge-cyan">Tactical Combat</span>
+              <div class="card-platform-pills">
+                <span class="platform-pill">iOS</span>
+                <span class="platform-pill">Android</span>
+              </div>
+              <img src="assets/deathdrive_hero_banner.png" alt="Motor Burn Arcade Combat Game" loading="lazy" />
+              <div class="card-media-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-title-row">
+                <h3 class="card-title">Motor Burn</h3>
+                <div class="card-arrow" aria-hidden="true">→</div>
+              </div>
+              <p class="card-description">
+                Fast-paced arcade vehicular combat featuring predictive turret aiming, dynamic targeting kinematics, and modular weapon progression.
+              </p>
+              <div class="card-meta-tags">
+                <span class="tech-tag">#Unity</span>
+                <span class="tech-tag">#ArcadePhysics</span>
+                <span class="tech-tag">#PredictiveAim</span>
+                <span class="tech-tag">#Mobile</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 2. 2 Player Racing 3D -->
+          <a class="project-card" data-category="mobile" href="portfolio_2pr3d.html">
+            <div class="card-media">
+              <span class="card-highlight-badge badge-gold">1,000,000+ Downloads</span>
+              <div class="card-platform-pills">
+                <span class="platform-pill">iOS</span>
+                <span class="platform-pill">Android</span>
+              </div>
+              <img src="assets/twoplayerracing_hero_banner.png" alt="2 Player Racing 3D" loading="lazy" />
+              <div class="card-media-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-title-row">
+                <h3 class="card-title">2 Player Racing 3D</h3>
+                <div class="card-arrow" aria-hidden="true">→</div>
+              </div>
+              <p class="card-description">
+                Split-screen and solo arcade racing sensation. Engineered custom lightweight physics and GC-free rendering tuned for low-to-mid tier devices.
+              </p>
+              <div class="card-meta-tags">
+                <span class="tech-tag">#Optimization</span>
+                <span class="tech-tag">#SplitScreen</span>
+                <span class="tech-tag">#LowLatency</span>
+                <span class="tech-tag">#DrawCallBatching</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 3. VR Parachute Simulator -->
+          <a class="project-card" data-category="vr" href="portfolio_vrparachute.html">
+            <div class="card-media">
+              <span class="card-highlight-badge badge-purple">VR Simulation</span>
+              <div class="card-platform-pills">
+                <span class="platform-pill">Meta Quest</span>
+                <span class="platform-pill">PC VR</span>
+              </div>
+              <img src="assets/parachute_banner.png" alt="VR Parachute Simulator" loading="lazy" />
+              <div class="card-media-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-title-row">
+                <h3 class="card-title">VR Parachute Simulator</h3>
+                <div class="card-arrow" aria-hidden="true">→</div>
+              </div>
+              <p class="card-description">
+                Realistic freefall and canopy dynamics featuring dynamic aerodynamic drag, flare controls, and two-handed rope steering via XR Interaction Toolkit.
+              </p>
+              <div class="card-meta-tags">
+                <span class="tech-tag">#XRToolkit</span>
+                <span class="tech-tag">#Aerodynamics</span>
+                <span class="tech-tag">#PhysicsSimulation</span>
+                <span class="tech-tag">#VR</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 4. Temporal Warfare: Chrono Strike -->
+          <a class="project-card" data-category="pc" href="portfolio_temporalwarfare.html">
+            <div class="card-media">
+              <span class="card-highlight-badge badge-cyan">Tactical FPS</span>
+              <div class="card-platform-pills">
+                <span class="platform-pill">PC</span>
+                <span class="platform-pill">itch.io</span>
+              </div>
+              <img src="assets/temporalwarfare_hero_banner.png" alt="Temporal Warfare: Chrono Strike" loading="lazy" />
+              <div class="card-media-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-title-row">
+                <h3 class="card-title">Temporal Warfare: Chrono Strike</h3>
+                <div class="card-arrow" aria-hidden="true">→</div>
+              </div>
+              <p class="card-description">
+                Single-player tactical FPS built around dynamic slow-motion combat manipulation, responsive gunplay feel, and a multi-level military infiltration campaign.
+              </p>
+              <div class="card-meta-tags">
+                <span class="tech-tag">#TimeScaleFX</span>
+                <span class="tech-tag">#FPSMechanics</span>
+                <span class="tech-tag">#EnemyAI</span>
+                <span class="tech-tag">#LevelProgression</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- 5. HIDRO HAZBO -->
+          <a class="project-card" data-category="jam" href="portfolio_hidrohazbo.html">
+            <div class="card-media">
+              <span class="card-highlight-badge badge-gold">1st Place Winner 🏆</span>
+              <div class="card-platform-pills">
+                <span class="platform-pill">OTGET Jam 3</span>
+                <span class="platform-pill">itch.io</span>
+              </div>
+              <img src="assets/hidrohazbo_herobanner.png" alt="HIDRO HAZBO Game Jam Winner" loading="lazy" />
+              <div class="card-media-overlay"></div>
+            </div>
+            <div class="card-content">
+              <div class="card-title-row">
+                <h3 class="card-title">HIDRO HAZBO</h3>
+                <div class="card-arrow" aria-hidden="true">→</div>
+              </div>
+              <p class="card-description">
+                Top-down action-roguelike built in 72 hours. Features a dynamic 4x4 real-time biome grid simulation and a multi-phase state machine boss AI.
+              </p>
+              <div class="card-meta-tags">
+                <span class="tech-tag">#GridSimulation</span>
+                <span class="tech-tag">#StateMachineAI</span>
+                <span class="tech-tag">#Roguelike</span>
+                <span class="tech-tag">#GameJuice</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           INTERACTIVE GAMEPLAY LAB (Interactive In-Browser Mechanics)
+           ========================================================================== -->
+      <section id="game-lab" class="lab-section" style="scroll-margin-top: 90px;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Interactive Mechanics Lab</h2>
+            <span class="section-badge">Live Playable Tech</span>
+          </div>
+          <span style="font-size:13px;color:var(--text-muted);">
+            Test in-browser simulations of core mechanics from my games
+          </span>
+        </div>
+
+        <div class="arcade-deck">
+          <div class="arcade-top-bar">
+            <div class="arcade-status-indicator">
+              <span class="arcade-led"></span>
+              <span id="hud-mode-title">KINEMATICS: PREDICTIVE AIM</span>
+            </div>
+
+            <div class="lab-tabs">
+              <button class="lab-tab-btn active" data-lab="turret">
+                🎯 Motor Burn: Predictive Turret
+              </button>
+              <button class="lab-tab-btn" data-lab="biome">
+                🌿 HIDRO HAZBO: Biome Grid
+              </button>
+              <button class="lab-tab-btn" data-lab="chrono">
+                ⏳ Temporal Warfare: Chrono Strike
+              </button>
+            </div>
+          </div>
+
+          <div class="arcade-stage">
+            <canvas id="lab-canvas"></canvas>
+
+            <!-- Real-time HUD -->
+            <div class="arcade-overlay-hud">
+              <div class="hud-pill" id="hud-aim-status">LEAD INTERCEPT ACTIVE</div>
+              <div class="hud-pill" id="hud-score">HITS: 0</div>
+            </div>
+          </div>
+
+          <!-- Controls Bar -->
+          <div class="arcade-controls-panel">
+            <!-- Turret Controls -->
+            <div class="lab-controls-sub" id="lab-controls-turret" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+              <button class="arcade-btn" id="turret-aim-toggle" type="button">Mode: Predictive (Lead)</button>
+              <button class="arcade-btn" id="turret-fire-btn" type="button" style="background:var(--accent-cyan);color:#031422;font-size:14px;padding:9px 20px;">⚡ FIRE TURRET</button>
+              <button class="arcade-btn" id="turret-autofire-toggle" type="button" style="background:rgba(255,255,255,0.06);color:var(--text-muted);border-color:var(--line);">Auto-Fire: OFF</button>
+              <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono);">
+                Target moves dynamically. Click ⚡ FIRE TURRET or tap inside canvas to shoot!
+              </span>
+            </div>
+
+            <!-- Biome Grid Controls -->
+            <div class="lab-controls-sub" id="lab-controls-biome" style="display:none;gap:12px;flex-wrap:wrap;align-items:center;">
+              <button class="arcade-btn" id="biome-water-btn" type="button">💧 Spray Moisture</button>
+              <div class="hud-pill" id="hud-locked-tiles" style="color:var(--accent-gold);">LOCKED: 0/16</div>
+              <span style="font-size:12.5px;color:var(--text-muted);font-family:var(--font-mono);">
+                Click/Tap tiles to hydrate! Maintain green fertile zone to lock forest tiles (🏆 4 to win).
+              </span>
+            </div>
+
+            <!-- Chrono Controls -->
+            <div class="lab-controls-sub" id="lab-controls-chrono" style="display:none;gap:12px;flex-wrap:wrap;align-items:center;">
+              <button class="arcade-btn" id="chrono-slowmo-btn" type="button" style="border-color:var(--accent-purple);color:var(--accent-purple);">
+                ⏳ HOLD FOR SLOW-MOTION
+              </button>
+              <div class="hud-pill" id="hud-timescale" style="color:var(--accent-cyan);">100% SPEED</div>
+              <span style="font-size:12.5px;color:var(--text-muted);font-family:var(--font-mono);">
+                Hold button to drop time scale to 12% and trigger tactical bullet dilation.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Competencies & Skills Section -->
+      <section id="skills" class="skills-section" style="scroll-margin-top: 100px;">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Technical Expertise</h2>
+            <span class="section-badge">Core Disciplines</span>
+          </div>
+        </div>
+
+        <div class="skills-matrix">
+          <div class="skill-category">
+            <div class="skill-category-header">
+              <div class="skill-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <h3>Gameplay & Physics</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">Custom Arcade & Wheel Vehicle Physics</li>
+              <li class="skill-item">Predictive Aiming & Kinematic Turrets</li>
+              <li class="skill-item">Dynamic Aerodynamic Drag & Lift Modeling</li>
+              <li class="skill-item">FPS & Top-Down Responsive Movement</li>
+              <li class="skill-item">Camera Shake, Cinemachine & "Game Juice"</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-header">
+              <div class="skill-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <h3>Architecture & AI</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">State Machine Pattern (FSM) for Bosses & NPCs</li>
+              <li class="skill-item">Event-Driven & Decoupled Architecture</li>
+              <li class="skill-item">ScriptableObject-Driven Game Systems</li>
+              <li class="skill-item">Dynamic Grid & Biome Simulation Logic</li>
+              <li class="skill-item">Modular Health, Damage & Combat Layers</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-header">
+              <div class="skill-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24M14.83 14.83l4.24 4.24M14.83 9.17l4.24-4.24M4.93 19.07l4.24-4.24"/></svg>
+              </div>
+              <h3>Optimization & Profiling</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">Unity Profiler: Eliminating GC Allocs & Spikes</li>
+              <li class="skill-item">Draw Call Batching & Sprite Atlas Packing</li>
+              <li class="skill-item">Object Pooling for High-Frequency VFX/Projectiles</li>
+              <li class="skill-item">Low-End Android & Standalone VR Budgets</li>
+              <li class="skill-item">ASTC / ETC2 Texture Compression Pipelines</li>
+            </ul>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-header">
+              <div class="skill-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <h3>Engines & Tooling</h3>
+            </div>
+            <ul class="skill-list">
+              <li class="skill-item">Unity Engine (2D, 3D, URP)</li>
+              <li class="skill-item">C# (.NET, Async, Linq-free hot paths)</li>
+              <li class="skill-item">XR Interaction Toolkit (Oculus/Meta Quest)</li>
+              <li class="skill-item">Git / GitHub Version Control</li>
+              <li class="skill-item">Google Play Console & Apple App Store Connect</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+      <div>© <span id="y">2026</span> Ali Badalov. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="https://play.google.com/store/apps/developer?id=Badaloff+Games&hl=en" target="_blank" rel="noopener">Google Play</a>
+        <a href="https://apps.apple.com/us/developer/ali-badalov/id1547473316" target="_blank" rel="noopener">App Store</a>
+        <a href="https://www.linkedin.com/in/ali-badalov-97174b201/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
     </footer>
   </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <!-- Mobile Floating Action Dock (< 768px) -->
+  <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
+    <a href="index.html" class="mobile-dock-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a href="#projects" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 18 3 21 8 12 22 3 8 6 3"/></svg>
+      Projects
+    </a>
+    <a href="#game-lab" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.35 18A2 2 0 0 0 6 21h12a2 2 0 0 0 1.65-3L14 9.31V2"/></svg>
+      Game Lab
+    </a>
+    <a href="assets/Ali_Badalov_CV.pdf" download="Ali_Badalov_CV.pdf" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      CV
+    </a>
+    <a href="mailto:alibedelov@gmail.com" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+      Contact
+    </a>
+  </nav>
+
+  <!-- Main JavaScript Bundle -->
+  <script src="js/main.js"></script>
 </body>
 </html>

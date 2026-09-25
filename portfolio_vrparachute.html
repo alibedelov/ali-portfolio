@@ -3,129 +3,230 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VR Parachute Simulator — Project</title>
-  <style>
-    :root{ --bg:#0c1015; --panel:#0f151c; --text:#e9eef5; --muted:#9fb3c8; --line:#1a2330; --accent:#7bd0ff; }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
-    a{color:inherit;text-decoration:none}
-    .wrap{max-width:1060px;margin:0 auto;padding:28px}
-    header{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
-    h1{margin:0;font-size:28px}
-    .crumbs a{color:var(--muted)}
-    .btn{padding:10px 14px;border-radius:10px;border:1px solid var(--accent);color:#06243a;background:linear-gradient(180deg,#c3e8ff,#7bd0ff);font-weight:800}
-    h2{margin:26px 0 10px;font-size:22px}
-    p{line-height:1.7;color:var(--muted)}
-    ul{line-height:1.8;color:var(--muted)}
-    .hero{margin:18px 0;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 40px rgba(0,0,0,.25)}
-    .hero img{display:block;width:100%;height:380px;object-fit:cover;background:#0d1218}
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px}
-    figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#0e141a}
-    
-    /* Clickable image styling */
-    figure img{width:100%;height:200px;object-fit:cover;cursor:pointer;transition:opacity 0.2s ease;}
-    figure img:hover{opacity:0.85;}
-    
-    figcaption{padding:10px 12px;font-size:14px;color:var(--muted)}
-    .meta{display:flex;gap:10px;flex-wrap:wrap}
-    .pill{border:1px solid var(--line);padding:2px 10px;border-radius:999px;color:var(--muted);font-size:12px}
-    code.badge{background:#0e141a;border:1px solid var(--line);padding:2px 8px;border-radius:999px;color:var(--muted);font-size:12px}
-
-    /* Lightbox CSS */
-    .lightbox {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex; justify-content: center; align-items: center;
-      z-index: 1000;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .lightbox.active {
-      opacity: 1; pointer-events: auto;
-    }
-    .lightbox img {
-      max-width: 90%; max-height: 90vh;
-      border-radius: 8px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      object-fit: contain;
-    }
-  </style>
+  <title>VR Parachute Simulator — Case Study | Ali Badalov</title>
+  <meta name="description" content="VR Parachute Simulator: High-fidelity aerodynamic drag & lift modeling, rope-handle steering mechanics using Unity XR Interaction Toolkit." />
+  <link rel="icon" type="image/png" href="assets/gamepad.png" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
+  <div class="ambient-glow"></div>
+  <div class="ambient-grid"></div>
+
   <div class="wrap">
-    <header>
-      <div class="crumbs"><a href="index.html">← Home</a></div>
-      <a class="btn" href="#screenshots">Skip to Screens</a>
+    <header class="site-header">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <img src="assets/gamepad.png" alt="Gamepad" width="28" height="28" />
+        </div>
+        <div class="brand-text">
+          <h1>Ali Badalov</h1>
+          <span class="tagline">Unity Gameplay Programmer</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="index.html">← Back to Portfolio</a>
+        <button class="sfx-toggle" id="sfx-toggle" type="button" aria-label="Toggle Sound Effects">
+          <span class="sfx-wave"><span class="sfx-bar"></span><span class="sfx-bar"></span><span class="sfx-bar"></span></span>
+          <span class="sfx-text">SFX: OFF</span>
+        </button>
+        <a class="nav-link" href="#gallery">Screenshots</a>
+        <a class="btn btn-primary" href="mailto:alibedelov@gmail.com">Inquire / Demo</a>
+      </div>
     </header>
 
-    <h1>VR Parachute Simulator</h1>
-    <div class="meta">
-      <span class="pill">VR</span>
-      <span class="pill">Unity</span>
-      <span class="pill">XR Interaction Toolkit</span>
-      <span class="pill">Physics</span>
-    </div>
-
-    <section>
-      <div class="hero">
-        <img src="assets/parachute_banner.png" alt="VR Parachute hero banner placeholder" />
+    <main class="project-detail-hero">
+      <div class="back-nav-bar">
+        <a class="back-link" href="index.html#projects">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Back to Projects
+        </a>
       </div>
-      <h2>Overview</h2>
-      <p>VR simulation focused on realistic freefall dynamics and canopy control. Implements aerodynamic drag modeling, glide tuning, and rope‑handle steering mapped to hand controllers. Comfort settings and motion thresholds reduce sickness for longer sessions.</p>
-    </section>
 
-    <section>
-      <h2>Key Contributions</h2>
-      <ul>
-        <li>Dynamic drag and lift model that responds to posture and canopy state.</li>
-        <li>Rope handle steering with XR Interaction Toolkit (grab, pull magnitude → turn rate).</li>
-        <li>Glide/flare control and landing profiles; configurable mass/area parameters.</li>
-        <li>Performance budget kept stable on standalone VR hardware.</li>
-      </ul>
-    </section>
+      <div class="project-page-header">
+        <h1 class="project-page-title">VR Parachute Simulator</h1>
+        <p class="project-page-tagline">
+          Realistic freefall dynamics and canopy flight simulation featuring physics-based aerodynamic drag modeling and two-handed rope steering built with Unity XR.
+        </p>
 
-    <section id="screenshots">
-      <h2>Gallery</h2>
-      <div class="grid">
-        <figure>
-          <img class="gallery-img" src="assets/parachute_freefall.png" alt="Freefall" />
-          <figcaption>Freefall — body posture affects drag & terminal velocity.</figcaption>
-        </figure>
-        <figure>
-          <img class="gallery-img" src="assets/parachute_canopy.png" alt="Canopy" />
-          <figcaption>Canopy open — glide tuning and flare control.</figcaption>
-        </figure>
-        <figure>
-          <img class="gallery-img" src="assets/parachute_handles.png" alt="Handles" />
-          <figcaption>Rope handle steering mapped to both hands.</figcaption>
-        </figure>
+        <div class="project-meta-strip">
+          <span class="meta-pill highlight">XR / Virtual Reality</span>
+          <span class="meta-pill">Unity 3D</span>
+          <span class="meta-pill">C#</span>
+          <span class="meta-pill">XR Interaction Toolkit</span>
+          <span class="meta-pill">Aerodynamics & Drag</span>
+          <span class="meta-pill">Motion Sickness Mitigation</span>
+        </div>
       </div>
-    </section>
 
+      <div class="detail-hero-banner">
+        <img src="assets/parachute_banner.png" alt="VR Parachute Simulator Hero Banner" />
+      </div>
+
+      <div class="detail-content-layout">
+        <div class="detail-main-content">
+          <div class="content-block">
+            <h2>Overview</h2>
+            <p>
+              VR Parachute Simulator is an immersive training and recreational simulation focused on authentic freefall aerodynamics and post-deployment canopy control. The simulation accurately represents terminal velocity shifts governed by player posture, canopy inflation dynamics, and wind shear vectors.
+            </p>
+            <p>
+              By leveraging the Unity XR Interaction Toolkit, the control scheme mirrors actual skydiving steering toggles: pulling down on the left or right riser creates proportional drag, pivoting the parachute and flaring for landing flare flares.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2>Key Technical Contributions</h2>
+            <ul class="systems-feature-list">
+              <li class="systems-feature-item">
+                <strong>Physics-Based Aerodynamic Model:</strong> Programmed a continuous drag/lift equation calculating terminal velocity and glide ratios dynamically from player orientation, canopy surface area, and wind drift.
+              </li>
+              <li class="systems-feature-item">
+                <strong>XR Rope-Handle Steering:</strong> Designed interactive toggle grab handles with haptic force feedback; pull distance translates to roll and yaw angular velocity with realistic tension curves.
+              </li>
+              <li class="systems-feature-item">
+                <strong>Landing & Flare Dynamics:</strong> Implemented flare mechanics requiring synchronized two-handed brake pulls at optimal altitudes to decelerate vertical descent for soft touchdowns.
+              </li>
+              <li class="systems-feature-item">
+                <strong>Locomotion Comfort Tuning:</strong> Integrated peripheral tunneling (vignette gating) during high-G turns and rapid pitch changes to virtually eliminate simulator sickness.
+              </li>
+              <li class="systems-feature-item">
+                <strong>Standalone VR Optimization:</strong> Maintained a rock-solid 72/90 FPS performance target on Meta Quest standalone architecture with zero frame drops.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <aside class="detail-sidebar">
+          <div class="sidebar-card">
+            <h3>Project Specifications</h3>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Domain</span>
+              <span class="spec-value">VR Simulation</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Engine</span>
+              <span class="spec-value">Unity</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Framework</span>
+              <span class="spec-value">XR Interaction Toolkit</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Language</span>
+              <span class="spec-value">C#</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Target Hardware</span>
+              <span class="spec-value">Meta Quest, PC VR</span>
+            </div>
+            <div class="sidebar-spec-row">
+              <span class="spec-label">Key Focus</span>
+              <span class="spec-value">Physics & Comfort</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Gallery -->
+      <section class="gallery-section" id="gallery">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2 class="section-title">Simulation Gallery</h2>
+            <span class="section-badge">Click to enlarge</span>
+          </div>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/parachute_freefall.png" alt="Freefall descent phase" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Freefall Phase — Terminal velocity calculated dynamically according to posture and altitude.</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/parachute_canopy.png" alt="Canopy open and glide control" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Canopy Flight — Glide ratio adjustment and horizontal navigation toward landing zones.</figcaption>
+          </figure>
+
+          <figure class="gallery-card">
+            <div class="gallery-card-img-wrap">
+              <img src="assets/parachute_handles.png" alt="XR Rope handles steering view" loading="lazy" />
+              <div class="gallery-zoom-hint">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M12 10h-2v2H9v-2H7V9h2V7h1v2h2v1z"/></svg>
+              </div>
+            </div>
+            <figcaption>Interactive Toggles — Dual-hand XR controllers mapped to parachute steering risers.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Pagination -->
+      <nav class="project-pagination">
+        <a class="pagination-item" href="portfolio_2pr3d.html">
+          <span class="pagination-label">← Previous Project</span>
+          <span class="pagination-title">2 Player Racing 3D</span>
+        </a>
+        <a class="pagination-item next" href="portfolio_temporalwarfare.html">
+          <span class="pagination-label">Next Project →</span>
+          <span class="pagination-title">Temporal Warfare</span>
+        </a>
+      </nav>
+    </main>
+
+    <footer class="site-footer">
+      <div>© <span id="y">2026</span> Ali Badalov.</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+    </footer>
   </div>
 
   <div class="lightbox" id="lightbox">
-    <img src="" alt="Enlarged view" id="lightbox-img">
+    <div class="lightbox-close" title="Close (Esc)">✕</div>
+    <div class="lightbox-nav-btn lightbox-prev" title="Previous Image (←)">‹</div>
+    <div class="lightbox-nav-btn lightbox-next" title="Next Image (→)">›</div>
+    <div class="lightbox-content-wrap">
+      <img src="" alt="" id="lightbox-img" />
+      <div class="lightbox-caption"></div>
+      <div class="lightbox-counter"></div>
+    </div>
   </div>
 
-  <script>
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const galleryImages = document.querySelectorAll('.gallery-img');
+  <!-- Mobile Floating Action Dock (< 768px) -->
+  <nav class="mobile-bottom-dock" aria-label="Mobile Navigation Dock">
+    <a href="index.html" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </a>
+    <a href="index.html#projects" class="mobile-dock-item active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 18 3 21 8 12 22 3 8 6 3"/></svg>
+      Projects
+    </a>
+    <a href="index.html#game-lab" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.31L4.35 18A2 2 0 0 0 6 21h12a2 2 0 0 0 1.65-3L14 9.31V2"/></svg>
+      Game Lab
+    </a>
+    <a href="assets/Ali_Badalov_CV.pdf" download="Ali_Badalov_CV.pdf" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      CV
+    </a>
+    <a href="mailto:alibedelov@gmail.com" class="mobile-dock-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+      Contact
+    </a>
+  </nav>
 
-    // Open lightbox when clicking a gallery image
-    galleryImages.forEach(img => {
-      img.addEventListener('click', () => {
-        lightboxImg.src = img.src;
-        lightbox.classList.add('active');
-      });
-    });
-
-    // Close lightbox when clicking anywhere on the dark overlay
-    lightbox.addEventListener('click', () => {
-      lightbox.classList.remove('active');
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
